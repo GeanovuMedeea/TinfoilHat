@@ -9,7 +9,6 @@ from langchain_community.vectorstores import Chroma
 from embedder import ollama_embedder
 import os
 
-
 api_key = os.getenv("API_KEY")
 model_name = os.getenv("MODEL_NAME")
 base_url = os.getenv("BASE_URL")
@@ -65,3 +64,15 @@ def get_response(query: str) -> str:
     result = rag_chain.invoke({"question": query})
     answer = result["answer"]
     return answer
+
+
+def get_response_with_source(query: str) -> tuple[str, list[str]]:
+    """
+    Get the response from the RAG model with source documents.
+    :param query: The query to ask the model.
+    :return: The response from the model with source documents.
+    """
+    result = rag_chain.invoke({"question": query})
+    answer = result["answer"]
+    sources = result["source_documents"]
+    return answer, [source.page_content for source in sources]
