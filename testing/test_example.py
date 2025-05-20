@@ -1,6 +1,8 @@
+# pip install deepeval
 # pip install rouge-score
 # pip install evaluate
 # phi3 running, all-minilm installed
+# cd vectordb, python vectordb.py
 
 from deepeval import assert_test
 from deepeval.metrics import AnswerRelevancyMetric, FaithfulnessMetric, GEval
