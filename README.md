@@ -127,12 +127,15 @@ Context: {context} Input: {question}
 
 # 🧪 Evaluation Strategy
 
-| Metric             | Purpose                                       |
+| Metric             | Score                                         |
 |--------------------|-----------------------------------------------|
-| ✅ Faithfulness     | Is the conspiracy sourced from retrieved docs? |
-| 🎯 Relevance       | Does the context match the query?             |
-| 🧠 Tone Match      | Custom test for “paranoid/deranged” language  |
-| 🧢 Outrage Score   | Measures the insanity level    |
+| Faithfulness       | Passed 0.5 threshold                          |
+| Relevance          | Passed 0.5 threshold                          |
+| GEval              | Passed 0.5 threshold                          |
+| ROUGE-1            | 0.238632 (avg. over 5 test prompts)           |
+| ROUGE-2            | 0.026893 (avg. over 5 test prompts)           |
+| ROUGE-L            | 0.1093128 (avg. over 5 test prompts)          |
+| BLEU               | 0.00412298 (avg. over 5 test prompts)         |
 
 
 ---
