@@ -2,6 +2,8 @@ from langchain_openai import ChatOpenAI
 from langchain.prompts import ChatPromptTemplate
 from langchain.prompts import HumanMessagePromptTemplate
 from langchain.prompts import SystemMessagePromptTemplate
+
+from filter.toxicity_filter import *
 from prompts import system_prompt, rag_user_prompt
 from langchain.chains import ConversationalRetrievalChain
 from langchain.memory import ConversationBufferWindowMemory
@@ -32,7 +34,8 @@ rag_prompt = ChatPromptTemplate.from_messages(
     ]
 )
 
-persistence_dir = "../chroma"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+persistence_dir = os.path.join(script_dir, "..", "chroma")
 
 vectorstore = Chroma(
     embedding_function=ollama_embedder,
@@ -61,8 +64,12 @@ def get_response(query: str) -> str:
     :param query: The query to ask the model.
     :return: The response from the model.
     """
+    if is_toxic(query):
+        return blocked_input_response()
     result = rag_chain.invoke({"question": query})
     answer = result["answer"]
+    if is_toxic(answer):
+        return blocked_input_response()
     return answer
 
 

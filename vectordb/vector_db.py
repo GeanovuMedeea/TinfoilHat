@@ -3,57 +3,41 @@ from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from dotenv import load_dotenv
 from langchain_community.vectorstores import Chroma
-import ollama
 from typing import List
 from langchain.embeddings.base import Embeddings
+from embedder import ollama_embedder
 
 load_dotenv(dotenv_path="../.env")
 
 model_name = os.getenv("EMBEDDING_MODEL")
 base_api = os.getenv("BASE_API")
 
-
-class OllamaEmbedder(Embeddings):
-    def __init__(self, base_url: str = base_api, model: str = model_name):
-        self.base_url = base_url
-        self.model = model
-
-    def embed_documents(self, texts: List[str]) -> List[List[float]]:
-        response = ollama.embed(model=self.model, input=texts)
-        embeddings = response["embeddings"]
-        return embeddings
-
-    def embed_query(self, text: str) -> List[float]:
-        response = ollama.embed(model=self.model, input=text)
-        embedding = response["embeddings"][0]
-        return embedding
-
-
-ollama_embedder = OllamaEmbedder()
-
-documents_directory = "../conspiracy_documents"
+documents_directory = "./conspiracy_documents"
 
 documents = []
 
 for filename in os.listdir(documents_directory):
     if filename.endswith(".pdf"):
-        file_path = os.path.join(documents_directory, filename)
-        loader = PyPDFLoader(file_path)
-        documents.extend(loader.load())
+        try:
+            file_path = os.path.join(documents_directory, filename)
+            loader = PyPDFLoader(file_path)
+            documents.extend(loader.load())
+        except Exception as e:
+            print(f"Skipping {filename} due to error: {e}")
 
 text_splitter = RecursiveCharacterTextSplitter(
-    chunk_size=500,
-    chunk_overlap=100,
+    chunk_size=1500,
+    chunk_overlap=200,
     length_function=len
 )
 
 chunks = text_splitter.split_documents(documents)
+chunks = [chunk for chunk in chunks if len(chunk.page_content.strip()) > 20]
 
-persist_directory = "../chroma"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+persist_directory = os.path.join(script_dir, "..", "chroma")
+os.makedirs(persist_directory, exist_ok=True)
 
-# check if the persist directory exists
-if not os.path.exists(persist_directory):
-    os.makedirs(persist_directory)
 
 # clear the persist directory if it exists
 if os.path.exists(persist_directory):

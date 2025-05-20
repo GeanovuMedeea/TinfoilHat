@@ -2,3 +2,9 @@
 ./chroma
 ./.venv
 ./.gradio
+phi-lora-finetuned/
+phi-lora-merged/
+finetune/phi_finetuned_conspiracy_v2/
+finetune/phi_finetuned_conspiracy_v3/
+conspiracy_documents/
+finetune/lamma.cpp/
