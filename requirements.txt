@@ -29,3 +29,6 @@ pypdf~=5.5.0
 langchain-community~=0.3.24
 chromadb~=1.0.9
 langchain-openai~=0.3.16
+deepeval~=2.9.3
+evaluate~=0.4.0
+rouge-score~=0.1.2

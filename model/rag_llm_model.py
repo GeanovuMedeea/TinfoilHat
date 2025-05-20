@@ -76,3 +76,9 @@ def get_response_with_source(query: str) -> tuple[str, list[str]]:
     answer = result["answer"]
     sources = result["source_documents"]
     return answer, [source.page_content for source in sources]
+
+def clear_memory():
+    """
+    Clear the memory of the RAG model.
+    """
+    memory.clear()
