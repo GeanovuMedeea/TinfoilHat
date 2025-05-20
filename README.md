@@ -1,4 +1,4 @@
-x  # 🤖 TinfoilHat Chatbot
+# 🤖 TinfoilHat Chatbot
 
 > “The truth is out there. And it’s **completely insane.” 🛸📡🧢
 
