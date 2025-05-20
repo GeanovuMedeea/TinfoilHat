@@ -1,4 +1,4 @@
-# 🤖 TinfoilHat Chatbot
+x  # 🤖 TinfoilHat Chatbot
 
 > “The truth is out there. And it’s **completely insane.” 🛸📡🧢
 
@@ -17,7 +17,7 @@ TinfoilHat is an LLM-powered chatbot that simulates the persona of a deeply para
 ---
 
 ## 📊 Flow Diagram
-![Flowchart.png](assets/Flowchart.png)
+![Flowchart.png]([assets/Flowchart.png](https://drive.google.com/file/d/1QGMN9FGr5YVp8KWEQVSAuYiWzBcvIyAn/view?usp=sharing))
 
 ---
 
