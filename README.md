@@ -17,8 +17,7 @@ TinfoilHat is an LLM-powered chatbot that simulates the persona of a deeply para
 ---
 
 ## 📊 Flow Diagram
-![Flowchart.png]([assets/Flowchart.png](https://drive.google.com/file/d/1QGMN9FGr5YVp8KWEQVSAuYiWzBcvIyAn/view?usp=sharing))
-
+![Image](https://github.com/user-attachments/assets/ab591526-885b-478d-a3ac-354ef7ca842e)
 ---
 
 ## 🧰 Technologies Used
